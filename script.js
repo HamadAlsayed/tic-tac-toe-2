@@ -11,9 +11,12 @@ function Gameboard() {
         }
     }
     
-    
+    function getBoard() {
+        return board;
+    }
 
     return {
+        getBoard,
         
 
     }
