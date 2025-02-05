@@ -20,6 +20,7 @@ function Gameboard() {
         // Else change the marker at index from 0 to the coresponding player's marker
     }
 
+    // Reset the board elements to defualt values
     const resetBoard = () => {
         for (let i = 0; i < rows; i++) {
             for (let j = 0; j < columns; j++) {
@@ -34,4 +35,37 @@ function Gameboard() {
         resetBoard,
     }
 
+}
+
+function GameController
+(
+    playerOneName = 'Player One',
+    playerTwoName = 'Player Two'
+) {
+
+    let players =
+    [
+        {
+            playerName: playerOneName,
+            marker: 1,
+        },
+        {
+            playerName: playerTwoName,
+            marker: 2,
+        }
+    ]
+
+    // Define starting player
+    let currentPlayer = players[0];
+
+    // If currentPlayer is playerOne then switch currentPlayer to playerTwo and vice versa
+    const switchTurn = () => currentPlayer == players[0] ? players[1] : players[0];
+
+    // Return currentPlayer value
+    const getPlayer = () => currentPlayer;
+
+    return {
+        switchTurn,
+        getPlayer,
+    }
 }
