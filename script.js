@@ -21,7 +21,11 @@ function Gameboard() {
     }
 
     const resetBoard = () => {
-        
+        for (let i = 0; i < rows; i++) {
+            for (let j = 0; j < columns; j++) {
+                board[i] = 'cell';
+            }
+        }
     }
 
     return {
