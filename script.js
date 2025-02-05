@@ -9,30 +9,38 @@ function Gameboard() {
         board[i] = [];
         // For each array inside board add an element until j is no longer < columns
         for (let j = 0; j < columns; j++) {
-            board[i].push('cell');
+            board[i].push(Cell());
         }
     }
     const getBoard = () => board;
 
-    const placeMarker = () => {
-        // Check if, at the chosen index, there is already a marker
-        // If at the chosen index a marker is preset, return nothing and print a warning
-        // Else change the marker at index from 0 to the coresponding player's marker
+    const placeMarker = (row, column, player) => {
+        if (board[row][column].getValue() != 0) {
+            board[row][column].addMarker(player);
+        } else {
+            // If at the chosen index a marker is preset, return nothing and print a warning
+            console.log('Cell already taken!')
+        }
     }
 
     // Reset the board elements to defualt values
     const resetBoard = () => {
         for (let i = 0; i < rows; i++) {
             for (let j = 0; j < columns; j++) {
-                board[i] = 'cell';
+                board[i] = Cell();
             }
         }
+    }
+
+    const printBoard = () => {
+        // TODO
     }
 
     return {
         getBoard,
         placeMarker,
         resetBoard,
+        printBoard,
     }
 
 }
@@ -42,6 +50,8 @@ function GameController
     playerOneName = 'Player One',
     playerTwoName = 'Player Two'
 ) {
+
+    board = Gameboard();
 
     let players =
     [
@@ -59,13 +69,35 @@ function GameController
     let currentPlayer = players[0];
 
     // If currentPlayer is playerOne then switch currentPlayer to playerTwo and vice versa
-    const switchTurn = () => currentPlayer == players[0] ? players[1] : players[0];
+    const switchTurn = () => currentPlayer = players[0] ? players[1] : players[0];
 
     // Return currentPlayer value
     const getPlayer = () => currentPlayer;
 
+    const playRound = (row, column) => {
+        console.log(`${getPlayer()} is placing their marker at row: ${row}, column ${column}.`);
+        board.placeMarker(row, column, getPlayer());
+        switchTurn();
+        board.
+    }
+
     return {
         switchTurn,
         getPlayer,
+        playRound,
     }
 }
+
+function Cell() {
+    let value = 0;
+
+    const addMarker = (player) => value = player;
+    const getValue = () => value;
+
+    return {
+        addMarker,
+        getValue,
+    }
+}
+
+let game = GameController();
