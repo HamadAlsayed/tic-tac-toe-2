@@ -15,8 +15,8 @@ function Gameboard() {
     const getBoard = () => board;
 
     const placeMarker = (row, column, player) => {
-        if (board[row][column].getValue() != 0) {
-            board[row][column].addMarker(player);
+        if (board[row][column].getValue() == 0) {
+            board[row][column].addMarker(player.marker);
         } else {
             // If at the chosen index a marker is preset, return nothing and print a warning
             console.log('Cell already taken!')
@@ -33,7 +33,9 @@ function Gameboard() {
     }
 
     const printBoard = () => {
-        // TODO
+        // What's happening here is that we're essentially creating a new array that contains the values of the cells and printing it out
+        const boardWithCellValues = board.map((row) => row.map((cell) => cell.getValue()));
+        console.log(boardWithCellValues);
     }
 
     return {
@@ -75,14 +77,13 @@ function GameController
     const getPlayer = () => currentPlayer;
 
     const playRound = (row, column) => {
-        console.log(`${getPlayer()} is placing their marker at row: ${row}, column ${column}.`);
+        console.log(`${getPlayer().playerName} is placing their marker at row: ${row}, column ${column}.`);
         board.placeMarker(row, column, getPlayer());
         switchTurn();
-        board.
+        board.printBoard();
     }
 
     return {
-        switchTurn,
         getPlayer,
         playRound,
     }
