@@ -1,33 +1,33 @@
 function Gameboard() {
-    const board = [];
-    const rows = 3;
-    const columns = 3;
+    // Define array and dimensions
+    let board = [],
+    rows = 3,
+    columns = 3;
 
-    // Populate board with arrays to turn it into a 2D array
+    // While i < rows, board[i] = an empty array
     for (let i = 0; i < rows; i++) {
         board[i] = [];
+        // For each array inside board add an element until j is no longer < columns
         for (let j = 0; j < columns; j++) {
             board[i].push('cell');
         }
     }
-    
-    function getBoard() {
-        return board;
+    const getBoard = () => board;
+
+    const placeMarker = () => {
+        // Check if, at the chosen index, there is already a marker
+        // If at the chosen index a marker is preset, return nothing and print a warning
+        // Else change the marker at index from 0 to the coresponding player's marker
+    }
+
+    const resetBoard = () => {
+        
     }
 
     return {
         getBoard,
-        
-
+        placeMarker,
+        resetBoard,
     }
-}
-
-function playerFactory(playerOneName = 'Player One', playerTwoName = 'Player Two') {
 
 }
-
-function gameController() {
-
-}
-
-let game = Gameboard();
