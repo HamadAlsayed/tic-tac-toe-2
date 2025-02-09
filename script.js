@@ -54,6 +54,7 @@ function GameController
 ) {
 
     board = Gameboard();
+    let getBoard = board.getBoard();
 
     let players =
     [
@@ -76,6 +77,12 @@ function GameController
     // Return currentPlayer value
     const getPlayer = () => currentPlayer;
 
+    const restartGame = () => {
+        board.resetBoard();
+        console.log("New game has been created.");
+        board.printBoard();
+    }
+
     const playRound = (row, column) => {
         if (board.getBoard()[row][column].getValue() != 0) {
             console.log("Place your marker on another cell.")
@@ -90,6 +97,7 @@ function GameController
     return {
         getPlayer,
         playRound,
+        restartGame,
     }
 }
 
