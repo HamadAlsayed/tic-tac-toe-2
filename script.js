@@ -71,7 +71,7 @@ function GameController
     let currentPlayer = players[0];
 
     // If currentPlayer is playerOne then switch currentPlayer to playerTwo and vice versa
-    const switchTurn = () => currentPlayer = players[0] ? players[1] : players[0];
+    const switchTurn = () => currentPlayer = currentPlayer === players[0] ? players[1] : players[0];
 
     // Return currentPlayer value
     const getPlayer = () => currentPlayer;
