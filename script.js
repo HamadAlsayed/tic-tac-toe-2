@@ -17,9 +17,10 @@ function Gameboard() {
     const placeMarker = (row, column, player) => {
         if (board[row][column].getValue() == 0) {
             board[row][column].addMarker(player.marker);
-        } else {
+        } else{
             // If at the chosen index a marker is preset, return nothing and print a warning
-            console.log('Cell already taken!')
+            console.log('Cell already taken!');
+            return false;
         }
     }
 
@@ -77,6 +78,10 @@ function GameController
     const getPlayer = () => currentPlayer;
 
     const playRound = (row, column) => {
+        if (board.placeMarker(row, column, getPlayer()) === false) {
+            console.log("Place your marker on another cell.")
+            return;
+        }
         console.log(`${getPlayer().playerName} is placing their marker at row: ${row}, column ${column}.`);
         board.placeMarker(row, column, getPlayer());
         switchTurn();
