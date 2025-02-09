@@ -79,6 +79,7 @@ function GameController
 
     const restartGame = () => {
         board.resetBoard();
+        currentPlayer = players[0];
         console.log("New game has been created.");
         board.printBoard();
     }
