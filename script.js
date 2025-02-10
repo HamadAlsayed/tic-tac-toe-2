@@ -54,7 +54,6 @@ function GameController
 ) {
 
     board = Gameboard();
-    let getBoard = board.getBoard();
 
     let players =
     [
@@ -84,15 +83,51 @@ function GameController
         board.printBoard();
     }
 
+    const checkWinner = (board) => {
+        let winningCombinations = [
+            // Column wins
+            [[0, 0], [1, 0], [2, 0]],
+            [[0, 1], [1, 1], [2, 1]],
+            [[0, 2], [1, 2], [2, 2]],
+            // Row wins
+            [[0, 0], [0, 1], [0, 2]],
+            [[1, 0], [1, 1], [1, 2]],
+            [[2, 0], [2, 1], [2, 2]],
+            // Diagonal wins
+            [[0, 0], [1, 1], [2, 2]],
+            [[0, 2], [1, 1], [2, 0]],
+        ];
+
+        for (let combination of winningCombinations) {
+            let [a, b, c] = combination;
+            if (
+                board[a[0]][a[1]].getValue() === board[b[0]][b[1]].getValue() &&
+                board[b[0]][b[1]].getValue() === board[c[0]][c[1]].getValue() &&
+                board[a[0]][a[1]].getValue() != 0
+            ) {
+                return board[a[0]][a[1]].getValue();
+            }
+        }
+        return null;
+    }
+
     const playRound = (row, column) => {
+        // Prevent move if cell already has a marker
         if (board.getBoard()[row][column].getValue() != 0) {
             console.log("Place your marker on another cell.")
             return;
         }
         console.log(`${getPlayer().playerName} is placing their marker at row: ${row}, column ${column}.`);
         board.placeMarker(row, column, getPlayer());
-        switchTurn();
         board.printBoard();
+        
+        let winner = checkWinner(board.getBoard());
+        if (winner) {
+            console.log(`Player ${players.find(p => p.marker === winner).playerName} wins!`);
+            restartGame();
+            return;
+        }
+        switchTurn();
     }
 
     return {
