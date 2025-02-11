@@ -16,4 +16,6 @@ body, html {
     align-items: center;
     border: solid 5px black;
     background-color: white;
+    cursor: pointer;
+    font-size: 2rem;
 }

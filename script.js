@@ -53,7 +53,7 @@ function GameController
     playerTwoName = 'Player Two'
 ) {
 
-    board = Gameboard();
+    let board = Gameboard();
 
     let players =
     [
@@ -81,6 +81,7 @@ function GameController
         currentPlayer = players[0];
         console.log("New game has been created.");
         board.printBoard();
+        renderBoard(game);
     }
 
     const checkWinner = (board) => {
@@ -153,7 +154,33 @@ function GameController
         getPlayer,
         playRound,
         restartGame,
+        getBoard: () => board.getBoard(),
     }
+}
+
+let boardElement = document.getElementById('gameboard');
+let restartBtn = document.getElementById('restart-btn');
+
+function renderBoard(game) {
+    boardElement.innerHTML = '';
+
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            let newCell = document.createElement('div');
+            newCell.classList.add('cell');
+            newCell.dataset.row = i;
+            newCell.dataset.column = j;
+            newCell.textContent = game.getBoard()[i][j].getValue() === 0 ? '' : game.getBoard()[i][j].getValue();
+
+            newCell.addEventListener('click', () => {
+                game.playRound(i ,j);
+                renderBoard(game);
+            })
+
+            boardElement.appendChild(newCell);
+        }
+    }
+
 }
 
 function Cell() {
@@ -169,3 +196,8 @@ function Cell() {
 }
 
 let game = GameController();
+renderBoard(game);
+
+restartBtn.addEventListener('click', () => {
+    game.restartGame();
+})
