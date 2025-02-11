@@ -111,6 +111,17 @@ function GameController
         return null;
     }
 
+    const boardFull = (board) => {
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                if (board[i][j].getValue() == 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     const playRound = (row, column) => {
         // Prevent move if cell already has a marker
         if (board.getBoard()[row][column].getValue() != 0) {
@@ -127,6 +138,14 @@ function GameController
             restartGame();
             return;
         }
+
+        // TODO: Check for a tie
+        if (boardFull(board.getBoard())) {
+            console.log(`Game ended with a tie!`)
+            restartGame();
+            return;
+        }
+
         switchTurn();
     }
 
