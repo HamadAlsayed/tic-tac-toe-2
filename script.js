@@ -147,13 +147,16 @@ let restartBtn = document.getElementById('restart-btn');
 function renderBoard(game) {
     boardElement.innerHTML = '';
 
+    const setMarker = (num) => {return num === 1 ? 'X' : 'O';}
+
     for (let i = 0; i < 3; i++) {
+
         for (let j = 0; j < 3; j++) {
             let newCell = document.createElement('div');
             newCell.classList.add('cell', 'hover-effect');
             newCell.dataset.row = i;
             newCell.dataset.column = j;
-            newCell.textContent = game.getBoard()[i][j].getValue() === 0 ? '' : game.getBoard()[i][j].getValue();
+            newCell.textContent = game.getBoard()[i][j].getValue() === 0 ? '' : setMarker(game.getBoard()[i][j].getValue());
 
             newCell.addEventListener('click', () => {
                 game.playRound(i ,j);
