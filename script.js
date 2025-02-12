@@ -15,7 +15,7 @@ function Gameboard() {
         if (board[row][column].getValue() == 0) {
             board[row][column].addMarker(player.marker);
         } else if (board[row][column].getValue() != 0) {
-            console.log('Cell already taken!');
+            return;
         }
     }
 
@@ -70,7 +70,7 @@ function GameController
     const restartGame = () => {
         board.resetBoard();
         currentPlayer = players[0];
-        console.log("New game has been created.");
+        console.log('Game restarted');
         board.printBoard();
         renderBoard(game);
     }
@@ -115,8 +115,9 @@ function GameController
     }
 
     const playRound = (row, column) => {
+
         if (board.getBoard()[row][column].getValue() != 0) {
-            console.log("Place your marker on another cell.")
+            messageBoard.textContent = 'Place your marker on another cell!'
             return;
         }
         console.log(`${getPlayer().playerName} is placing their marker at row: ${row}, column ${column}.`);
@@ -125,13 +126,13 @@ function GameController
         
         let winner = checkWinner(board.getBoard());
         if (winner) {
-            console.log(`Player ${players.find(p => p.marker === winner).playerName} wins!`);
+            messageBoard.textContent = `Player ${players.find(p => p.marker === winner).playerName} wins!`;
             restartGame();
             return;
         }
 
         if (boardFull(board.getBoard())) {
-            console.log(`Game ended with a tie!`)
+            messageBoard.textContent = `Game ended with a tie!`;
             restartGame();
             return;
         }
@@ -183,6 +184,8 @@ function Cell() {
         getValue,
     }
 }
+
+let messageBoard = document.getElementById('message-board');
 
 let game = GameController();
 renderBoard(game);
