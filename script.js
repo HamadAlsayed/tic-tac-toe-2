@@ -110,7 +110,7 @@ function GameController
     const playRound = (row, column) => {
 
         if (board.getBoard()[row][column].getValue() != 0) {
-            messageBoard.textContent = 'Place your marker on another cell!'
+            displayMessage('Place your marker on another cell!');
             return;
         }
         console.log(`${getPlayer().playerName} is placing their marker at row: ${row}, column ${column}.`);
@@ -118,13 +118,13 @@ function GameController
         
         let winner = checkWinner(board.getBoard());
         if (winner) {
-            messageBoard.textContent = `Player ${players.find(p => p.marker === winner).playerName} wins!`;
+            displayMessage(`Player ${players.find(p => p.marker === winner).playerName} wins!`);
             restartGame();
             return;
         }
 
         if (boardFull(board.getBoard())) {
-            messageBoard.textContent = `Game ended with a tie!`;
+            displayMessage('Game ended with a tie!');
             restartGame();
             return;
         }
@@ -179,8 +179,13 @@ function Cell() {
     }
 }
 
-let messageBoard = document.getElementById('message-board'),
-nameForm = document.getElementById('name-form');
+let messageBoard = document.getElementById('message-board');
+
+function displayMessage(message) {
+    messageBoard.textContent = message;
+}
+
+let nameForm = document.getElementById('name-form');
 
 nameForm.addEventListener('submit', (e) => {
     let playerOneName = document.getElementById('pname1').value,
@@ -188,7 +193,7 @@ nameForm.addEventListener('submit', (e) => {
     game.players[0].playerName = playerOneName;
     game.players[1].playerName = playerTwoName;
     nameForm.style.display = 'none';
-    messageBoard.textContent = 'Good luck!';
+    displayMessage('Good luck!');
     e.preventDefault();
 })
 
