@@ -185,6 +185,7 @@ nameForm.addEventListener('submit', (e) => {
     game.players[0].playerName = playerOneName;
     game.players[1].playerName = playerTwoName;
     nameForm.style.display = 'none';
+    messageBoard.textContent = 'Good luck!';
     e.preventDefault();
 })
 
