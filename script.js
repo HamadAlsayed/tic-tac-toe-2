@@ -133,6 +133,7 @@ function GameController
     }
 
     return {
+        players,
         getPlayer,
         playRound,
         restartGame,
@@ -179,9 +180,21 @@ function Cell() {
 
 let messageBoard = document.getElementById('message-board');
 
+let nameForm = document.getElementById('name-form');
+
+nameForm.addEventListener('submit', (e) => {
+    let playerOneName = document.getElementById('pname1').value,
+    playerTwoName = document.getElementById('pname2').value;
+    game.players[0].playerName = playerOneName;
+    game.players[1].playerName = playerTwoName;
+    nameForm.style.display = 'none';
+    console.log('Player names changed.')
+    e.preventDefault();
+})
+
 let game = GameController();
 renderBoard(game);
 
 restartBtn.addEventListener('click', () => {
     game.restartGame();
-})
+});
