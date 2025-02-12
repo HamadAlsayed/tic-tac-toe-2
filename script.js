@@ -27,16 +27,10 @@ function Gameboard() {
         }
     }
 
-    const printBoard = () => {
-        const boardWithCellValues = board.map((row) => row.map((cell) => cell.getValue()));
-        console.log(boardWithCellValues);
-    }
-
     return {
         getBoard,
         placeMarker,
         resetBoard,
-        printBoard,
     }
 
 }
@@ -71,7 +65,6 @@ function GameController
         board.resetBoard();
         currentPlayer = players[0];
         console.log('Game restarted');
-        board.printBoard();
         renderBoard(game);
     }
 
@@ -122,7 +115,6 @@ function GameController
         }
         console.log(`${getPlayer().playerName} is placing their marker at row: ${row}, column ${column}.`);
         board.placeMarker(row, column, getPlayer());
-        board.printBoard();
         
         let winner = checkWinner(board.getBoard());
         if (winner) {
