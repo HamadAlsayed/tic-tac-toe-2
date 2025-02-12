@@ -42,6 +42,7 @@ function GameController
 ) {
 
     let board = Gameboard();
+    let gameEnded = false;
 
     let players =
     [
@@ -63,6 +64,7 @@ function GameController
 
     const restartGame = () => {
         board.resetBoard();
+        gameEnded = false;
         currentPlayer = players[0];
         console.log('Game restarted');
         renderBoard(game);
@@ -114,16 +116,20 @@ function GameController
             return;
         }
         console.log(`${getPlayer().playerName} is placing their marker at row: ${row}, column ${column}.`);
-        board.placeMarker(row, column, getPlayer());
+        if (gameEnded == false) {
+            board.placeMarker(row, column, getPlayer());
+        }
         
         let winner = checkWinner(board.getBoard());
-        if (winner) {
+        if (winner && gameEnded == false) {
             displayMessage(`Player ${players.find(p => p.marker === winner).playerName} wins!`);
+            gameEnded = true;
             return;
         }
 
         if (boardFull(board.getBoard())) {
             displayMessage('Game ended with a tie!');
+            gameEnded = true;
             return;
         }
 
