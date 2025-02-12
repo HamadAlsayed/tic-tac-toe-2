@@ -29,6 +29,7 @@ body, html {
     border: solid 5px black;
     font-size: 1.2rem;
     padding: 16px;
+    margin-bottom: 60px;
 }
 
 .hover-effect:hover {
