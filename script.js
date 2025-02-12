@@ -1,13 +1,10 @@
 function Gameboard() {
-    // Define array and dimensions
     let board = [],
     rows = 3,
     columns = 3;
 
-    // While i < rows, board[i] = an empty array
     for (let i = 0; i < rows; i++) {
         board[i] = [];
-        // For each array inside board add an element until j is no longer < columns
         for (let j = 0; j < columns; j++) {
             board[i].push(Cell());
         }
@@ -18,12 +15,10 @@ function Gameboard() {
         if (board[row][column].getValue() == 0) {
             board[row][column].addMarker(player.marker);
         } else if (board[row][column].getValue() != 0) {
-            // If at the chosen index a marker is preset, return nothing and print a warning
             console.log('Cell already taken!');
         }
     }
 
-    // Reset the board elements to defualt values
     const resetBoard = () => {
         for (let i = 0; i < rows; i++) {
             for (let j = 0; j < columns; j++) {
@@ -33,7 +28,6 @@ function Gameboard() {
     }
 
     const printBoard = () => {
-        // What's happening here is that we're essentially creating a new array that contains the values of the cells and printing it out
         const boardWithCellValues = board.map((row) => row.map((cell) => cell.getValue()));
         console.log(boardWithCellValues);
     }
@@ -67,13 +61,10 @@ function GameController
         }
     ]
 
-    // Define starting player
     let currentPlayer = players[0];
 
-    // If currentPlayer is playerOne then switch currentPlayer to playerTwo and vice versa
     const switchTurn = () => currentPlayer = currentPlayer === players[0] ? players[1] : players[0];
 
-    // Return currentPlayer value
     const getPlayer = () => currentPlayer;
 
     const restartGame = () => {
@@ -124,7 +115,6 @@ function GameController
     }
 
     const playRound = (row, column) => {
-        // Prevent move if cell already has a marker
         if (board.getBoard()[row][column].getValue() != 0) {
             console.log("Place your marker on another cell.")
             return;
@@ -140,7 +130,6 @@ function GameController
             return;
         }
 
-        // TODO: Check for a tie
         if (boardFull(board.getBoard())) {
             console.log(`Game ended with a tie!`)
             restartGame();
