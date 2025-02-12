@@ -21,15 +21,18 @@ body, html {
     align-items: center;
     border: solid 5px black;
     background-color: white;
-    cursor: pointer;
-    font-size: 2rem;
+    font-size: 3rem;
 }
 
-#restart-btn {
+button#restart-btn {
     margin: 10px;
-    background-color: white;
     border: solid 5px black;
     font-size: 1.2rem;
     padding: 16px;
+}
+
+.hover-effect:hover {
     cursor: pointer;
+    background-color: rgb(50, 50, 50);
+    color: white;
 }

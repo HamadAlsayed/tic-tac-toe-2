@@ -156,7 +156,7 @@ function renderBoard(game) {
     for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
             let newCell = document.createElement('div');
-            newCell.classList.add('cell');
+            newCell.classList.add('cell', 'hover-effect');
             newCell.dataset.row = i;
             newCell.dataset.column = j;
             newCell.textContent = game.getBoard()[i][j].getValue() === 0 ? '' : game.getBoard()[i][j].getValue();
