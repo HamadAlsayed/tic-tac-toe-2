@@ -119,13 +119,11 @@ function GameController
         let winner = checkWinner(board.getBoard());
         if (winner) {
             displayMessage(`Player ${players.find(p => p.marker === winner).playerName} wins!`);
-            restartGame();
             return;
         }
 
         if (boardFull(board.getBoard())) {
             displayMessage('Game ended with a tie!');
-            restartGame();
             return;
         }
 
