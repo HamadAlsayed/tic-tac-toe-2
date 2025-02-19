@@ -187,6 +187,9 @@ let messageBoard = document.getElementById('message-board');
 
 function displayMessage(message) {
     messageBoard.textContent = message;
+    const removeText = setTimeout(() => {
+        messageBoard.textContent = '';
+    }, 3000)
 }
 
 let nameForm = document.getElementById('name-form');
